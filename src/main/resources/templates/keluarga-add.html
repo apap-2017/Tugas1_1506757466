@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>SI Kependudukan - tambah keluarga</title>
+ <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+</head>
+
+<body>
+	<h2 class="page-header">Tambah Keluarga</h2>
+	<form id="form" action="/keluarga/tambah" method="post">
+		<div>
+			Alamat <br />
+			<input th:value="${alamat}" type="text" name="alamat" />
+		</div>
+		<div>
+			RT <br /> <input th:value="${rt}" type="text" name="rt" />
+		</div>
+		<div>
+			RW <br /> <input  th:value="${rw}" type="text" name="rw" />
+		</div>
+		<div>
+			Kota<select id="selKota" name="kota">
+				<option th:id="${'kot' + kota.getId()}" th:each="kota, iterationStatus: ${listOfKota}" th:value="${kota.getId()}" th:text="${kota.getKode_kota() + ' - ' + kota.getNama_kota()}"></option>
+			</select>
+		</div>
+		<div>
+			Kecamatan<select id="selKec" name="kecamatan">
+			<option th:id="${'kec' + kecamatan.getId()}" th:each="kecamatan, iterationStatus: ${listOfKec}" th:value="${kecamatan.getId()}" th:text="${kecamatan.getKode_kecamatan() + ' - ' + kecamatan.getNama_kecamatan()}"></option>
+			</select>
+		</div>
+		<div>
+			Kelurahan/Desa<select id="selKel" name="kelurahan">
+			<option th:id="${'kel' + kelurahan.getId()}" th:each="kelurahan, iterationStatus: ${listOfKel}" th:value="${kelurahan.getId()}" th:text="${kelurahan.getKode_kelurahan() + ' - ' + kelurahan.getNama_kelurahan()}"></option></select>
+		</div>
+		<input type="hidden" th:value="${kotaSelected}" id="kotaSelected" />
+		<input type="hidden" th:value="${kecamatan}" id="kotaSelected" />
+		<input type="hidden" th:value="1" id="isSubmit" name="isSubmit" />
+		<button id="sub" type="submit">Simpan</button>
+	</form>
+	<script>
+	 $("#selKota").change(function () {
+		 $("#isSubmit").val("0");
+		 $("#sub").click();
+	    });
+	 $("#selKec").change(function () {
+		 $("#isSubmit").val("0");
+		 $("#sub").click();
+	    });
+	 $( document ).ready(function(){
+		 var idkota = $("#kotaSelected").val();
+		 var idkec = $("#kecamatanSelected").val();
+		 $("#kot" + idkota).attr("selected", "selected");
+		 $("#kec" + idkec).attr("selected", "selected");
+	 });
+	 
+	</script>
+</body>
+</html>
+

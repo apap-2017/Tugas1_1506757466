@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>SI Kependudukan - ubah keluarga</title>
+ <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+</head>
+
+<body>
+	<h2 class="page-header">Ubah data Keluarga</h2>
+	<form id="form" action="/keluarga/ubah" method="post">
+		<div>
+			Alamat <br />
+			<input th:value="${keluarga.getAlamat()}" type="text" name="alamat" />
+		</div>
+		<div>
+			RT <br /> <input th:value="${keluarga.getRt()}" type="text" name="rt" />
+		</div>
+		<div>
+			RW <br /> <input  th:value="${keluarga.getRw()}" type="text" name="rw" />
+		</div>
+		<div>
+			Kota<select id="selKota" name="kota">
+				<option th:id="${'kot' + kota.getId()}" th:each="kota, iterationStatus: ${listOfKota}" th:value="${kota.getId()}" th:text="${kota.getKode_kota() + ' - ' + kota.getNama_kota()}"></option>
+			</select>
+		</div>
+		<div>
+			Kecamatan<select id="selKec" name="kecamatan">
+<!-- 			<option th:id="${'kec' + kecamatan.getId()}" th:each="kecamatan, iterationStatus: ${listOfKec}" th:value="${kecamatan.getId()}" th:text="${kecamatan.getKode_kecamatan() + ' - ' + kecamatan.getNama_kecamatan()}"></option> -->
+			</select>
+		</div>
+		<div>
+			Kelurahan/Desa<select id="selKel" name="kelurahan">
+<!-- 			<option th:id="${'kel' + kelurahan.getId()}" th:each="kelurahan, iterationStatus: ${listOfKel}" th:value="${kelurahan.getId()}" th:text="${kelurahan.getKode_kelurahan() + ' - ' + kelurahan.getNama_kelurahan()}"></option> -->
+		</select>
+		</div>
+		<input type="hidden" th:value="${keluarga.getNomor_kk()}" name="oldNkk" />
+		<input type="hidden" th:value="${keluarga.getId()}" name="idToUpdate" />
+		<button id="sub" type="submit">Simpan</button>
+	</form>
+	<script>
+	$( "#selKota" ).change(function() {
+		  var idKota = $('#selKota').val();
+		  var selKecDOM = $('#selKec');
+		  selKecDOM.find('option')
+		    .remove()
+		    .end();
+		  var path = document.location.origin + "/api/getKecamatan?kota=" + idKota;
+		  $.get(path, function(data) {
+			  var arr1 = data.split('%');
+			  arr1.forEach(function(item, index) {
+				  var arr2 = item.split('#');
+				  selKecDOM.append($("<option></option>")
+		                    .attr("value",arr2[0])
+		                    .text(arr2[2])); 
+				  
+			  });
+			});
+		});
+	$( "#selKec" ).change(function() {
+		  var idKec = $('#selKec').val();
+		  var selKelDOM = $('#selKel');
+		  selKelDOM.find('option')
+		    .remove()
+		    .end();
+		  var path = document.location.origin + "/api/getKelurahan?kecamatan=" + idKec;
+		  $.get(path, function(data) {
+			  var arr1 = data.split('%');
+			  arr1.forEach(function(item, index) {
+				  var arr2 = item.split('#');
+				  selKelDOM.append($("<option></option>")
+		                    .attr("value",arr2[0])
+		                    .text(arr2[2])); 
+				  
+			  });
+			});
+		});
+	</script>
+</body>
+</html>
+

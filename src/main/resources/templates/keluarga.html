@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>SI Kependudukan - Lihat Keluarga</title>
+ <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+</style>
+</head>
+
+<body>
+	<h2 th:text="'Lihat Data Keluarga - ' + ${keluarga.getNomor_kk()}">Lihat Data Keluarga</h2>
+	<table>
+		<tr>
+			<td>NKK</td>
+			<td th:text="${keluarga.getNomor_kk()}"></td>
+		</tr>
+		<tr>
+			<td>Alamat</td>
+			<td th:text="${keluarga.getAlamat()}"></td>
+		</tr>
+		<tr>
+			<td>RT/RW</td>
+			<td th:text="${keluarga.getRt()} + '/' + ${keluarga.getRw()}"></td>
+		</tr>
+		<tr>
+			<td>Kelurahan/Desa</td>
+			<td th:text="${keluarga.getKelurahan().getNama_kelurahan()}"></td>
+		</tr>
+		<tr>
+			<td>Kecamatan</td>
+			<td th:text="${keluarga.getKelurahan().getKecamatan().getNama_kecamatan()}"></td>
+		</tr>
+		<tr>
+			<td>Kota</td>
+			<td th:text="${keluarga.getKelurahan().getKecamatan().getKota().getNama_kota()}"></td>
+		</tr>
+	</table>
+	<hr></hr>
+	<table>
+		<tr>
+			<th>No.</th>
+			<th>Nama Lengkap</th>
+			<th>NIK</th>
+			<th>Jenis Kelamin</th>
+			<th>Tempat Lahir</th>
+			<th>Tanggal Lahir</th>
+			<th>Agama</th>
+			<th>Pekerjaan</th>
+			<th>Status Perkawinan</th>
+			<th>Status dalam Keluarga</th>
+			<th>Kewarganegaraan</th>
+		</tr>
+		<tr th:each="penduduk, iterationStatus: ${pendudukList}">
+			<td th:text="${iterationStatus.index + 1}"></td>
+			<td th:text="${penduduk.getNama()}"></td>
+			<td th:text="${penduduk.getNik()}"></td>
+			<td th:text="${penduduk.convertJenisKelamin()}"></td>
+			<td th:text="${penduduk.getTempat_lahir()}"></td>
+			<td th:text="${penduduk.getTanggal_lahir()}"></td>
+			<td th:text="${penduduk.getAgama()}"></td>
+			<td th:text="${penduduk.getPekerjaan()}"></td>
+			<td th:text="${penduduk.getStatus_perkawinan()}"></td>
+			<td th:text="${penduduk.getStatus_dalam_keluarga()}"></td>
+			<td th:text="${penduduk.convertWNIStatus()}"></td>
+		</tr>
+	</table>
+	<form th:action="'/keluarga/ubah'">
+	<input type="hidden" th:value="${keluarga.getNomor_kk()}" name="nkkToUpdate" />
+	<div>
+		<button type="submit">Ubah data</button>
+	</div>
+	</form>
+</body>
+</html>

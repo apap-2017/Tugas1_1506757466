@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>SI Kependudukan - Homepage</title>
+	 <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+        <!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+</head>
+<body>
+	<h2>Sistem Informasi Kependudukan Online Provinsi DKI Jakarta</h2>
+	<p>Selamat datang di Sistem Informasi Kependudukan Online Provinsi DKI Jakarta</p>
+	<hr></hr>
+	<div>
+		<a href="/penduduk/tambah"><button>Tambah penduduk</button></a>
+		<a href="/keluarga/tambah"><button>Tambah keluarga</button></a>
+	</div>
+	<hr></hr>
+	<h3>Lihat Data Penduduk Berdasarkan NIK</h3>
+	<b>Masukkan Nomor Induk Kependudukan</b>
+	<form action="/penduduk" method="get">
+		<div>
+			<input type="text" name="nik" />
+		</div>
+		<div>
+			<button type="submit" name="action">Lihat</button>
+		</div>
+	</form>
+	<hr></hr>
+	<h3>Lihat Data Keluarga Berdasarkan NKK</h3>
+	<b>Masukkan Nomor Kartu Keluarga</b>
+	<form action="/keluarga" method="get">
+		<div>
+			<input type="text" name="nkk" />
+		</div>
+		<div>
+			<button type="submit" name="action">Lihat</button>
+		</div>
+	</form>
+	<div></div>
+</body>
+</html>

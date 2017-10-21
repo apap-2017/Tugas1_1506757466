@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>SI Kependudukan - Lihat Penduduk</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+</head>
+<body>
+	<h2 th:text="'Lihat Data Keluarga - ' + ${penduduk.getNik()}">Lihat Data Penduduk</h2>
+	<table>
+		<tr>
+			<td>NIK</td>
+			<td th:text="${penduduk.getNik()}"></td>
+		</tr>
+		<tr>
+			<td>Nama</td>
+			<td th:text="${penduduk.getNama()}"></td>
+		</tr>
+		<tr>
+			<td>Tempat/Tanggal Lahir</td>
+			<td th:text="${penduduk.getTempat_lahir()} + ', ' + ${penduduk.getTanggal_lahir()} "></td>
+		</tr>
+		<tr>
+			<td>Alamat</td>
+			<td th:text="${penduduk.getKeluarga().getAlamat()}"></td>
+		</tr>
+		<tr>
+			<td>RT/RW</td>
+			<td th:text="${penduduk.getKeluarga().getRt()} + '/' + ${penduduk.getKeluarga().getRw()}"></td>
+		</tr>
+		<tr>
+			<td>Kelurahan/Desa</td>
+			<td th:text="${penduduk.getKeluarga().getKelurahan().getNama_kelurahan()}"></td>
+		</tr>
+		<tr>
+			<td>Kecamatan</td>
+			<td th:text="${penduduk.getKeluarga().getKelurahan().getKecamatan().getNama_kecamatan()}"></td>
+		</tr>
+		<tr>
+			<td>Kota</td>
+			<td th:text="${penduduk.getKeluarga().getKelurahan().getKecamatan().getKota().getNama_kota()}"></td>
+		</tr>
+		<tr>
+			<td>Golongan Darah</td>
+			<td th:text="${penduduk.getGolongan_darah()}"></td>
+		</tr>
+		<tr>
+			<td>Agama</td>
+			<td th:text="${penduduk.getAgama()}"></td>
+		</tr>
+		<tr>
+			<td>Status Perkawinan</td>
+			<td th:text="${penduduk.getStatus_perkawinan()}"></td>
+		</tr>
+		<tr>
+			<td>Pekerjaan</td>
+			<td th:text="${penduduk.getPekerjaan()}"></td>
+		</tr>
+		<tr>
+			<td>Kewarganegaraan</td>
+			<td th:text="${penduduk.convertWNIStatus()}"></td>
+		</tr>
+		<tr>
+			<td>Status Kematian</td>
+			<td th:text="${penduduk.convertWafatStatus()}"></td>
+		</tr>
+	</table>
+	<form th:action="'/penduduk/mati'" th:object="${pendudukForm}" method="post">
+		<input type="hidden" th:value="${penduduk.getNik()}" name="nik"/>
+		<div th:if="${penduduk.getIs_wafat() == 0}">
+			<button type="submit">Nonaktifkan</button>
+		</div>
+	</form>
+	<form th:action="'/penduduk/ubah'">
+	<input type="hidden" th:value="${penduduk.getNik()}" name="nikToUpdate" />
+	<div>
+		<button type="submit">Ubah data</button>
+	</div>
+	</form>
+</body>
+</html>

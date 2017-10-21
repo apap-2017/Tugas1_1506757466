@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>SI Kependudukan - tambah penduduk</title>
+ <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+  <link rel="stylesheet" href="/resources/demos/style.css" />
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+
+<body>
+	<h2 class="page-header">Tambah Penduduk</h2>
+	<form action="/penduduk/tambah" method="post">
+		<div>
+			Nama <br /> <input type="text" name="nama" />
+		</div>
+		<div>
+			Tempat Lahir <br /> <input type="text" name="tempat_lahir" />
+		</div>
+		<div>
+			Tanggal Lahir <br /> <input type="text" id="newPendudukDatepicker" name="tanggal_lahir" />
+		</div>
+		<div>
+			Jenis Kelamin <br /> <select name="jenis_kelamin">
+				<option value="0">Pria</option>
+				<option value="1">Wanita</option>
+			</select>
+		</div>
+		<div>
+			Golongan Darah <br /> <input type="text" name="golongan_darah" />
+		</div>
+		<div>
+			Agama <br /> <input type="text" name="agama" />
+		</div>
+		<div>
+			Status Perkawinan<br /> <select name="status_perkawinan">
+				<option value="Belum Kawin">Belum Kawin</option>
+				<option value="Kawin">Kawin</option>
+			</select>
+		</div>
+		<div>
+			Status Dalam Keluarga<br /> <input type="text" name="status_dalam_keluarga" />
+		</div>
+		<div>
+			Pekerjaan <br /> <input type="text" name="pekerjaan" />
+		</div>
+		<div>
+			Kewarganegaraan <br />
+			<select name="is_wni">
+				<option value="0">WNA</option>
+				<option value="1">WNI</option>
+			</select>
+		</div>
+		<div>
+			Status Kematian <br />
+			<select name="is_wafat">
+				<option value="0">Hidup</option>
+				<option value="1">Meninggal</option>
+			</select>
+		</div>
+		<div>
+			ID Keluarga <br /> 
+			<input type="text" name="id_keluarga" />
+<!-- 	ternyata kalau pake drop down list, lamanya minta ampun		
+				<select name="id_keluarga" > 
+				<option th:each="km, iterationStatus: ${listOfKm}" th:value="${km.getId()}" th:text="${km.getId() + ' - ' + km.getNomor_kk()}">Hidup</option>
+			</select> -->
+		</div>
+		<button type="submit">Simpan</button>
+	</form>
+	<script>
+	  $( function() {
+	    $( "#newPendudukDatepicker" ).datepicker({dateFormat:'yy-mm-dd'});
+	  } );</script>
+</body>
+</html>
+
