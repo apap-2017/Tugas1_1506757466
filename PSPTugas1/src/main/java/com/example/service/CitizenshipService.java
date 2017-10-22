@@ -27,6 +27,11 @@ public class CitizenshipService implements CitizenshipInterface {
 		return citizenshipMapper.selectPendudukByIdKeluarga(idk);
 	}
 	
+	public ArrayList<PendudukModel> searchPendudukByLocation(Integer idkel) {
+		log.info("select penduduk with idk {}", idkel);
+		return citizenshipMapper.searchPendudukByLocation(idkel);
+	}
+	
 	public Integer selectPendudukByGenderIncrement(String partialNIK) {
 		log.info("select penduduk with nik part {}", partialNIK);
 		return citizenshipMapper.selectPendudukByGenderIncrement(partialNIK);

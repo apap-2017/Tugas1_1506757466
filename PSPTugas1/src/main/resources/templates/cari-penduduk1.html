@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>SI Kependudukan - tampilkan data</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
+<script
+	src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+</head>
+<body>
+	<div th:replace="fragments/fragment :: header"></div>
+	<h2>Lihat Data Penduduk Berdasarkan Kota</h2>
+	<div>
+		<form id="form" action="/penduduk/cari" method="get">
+			Kota<select id="selKota" name="kota">
+				<option th:id="${'kot' + kota.getId()}"
+					th:each="kota, iterationStatus: ${listOfKota}"
+					th:value="${kota.getId()}"
+					th:text="${kota.getKode_kota() + ' - ' + kota.getNama_kota()}"></option>
+			</select><br />
+			<input type="hidden" name="kecamatan" value = ""/>
+			<input type="hidden" name="kelurahan" value = ""/>
+			<button id="sub" type="submit">Cari</button>
+		</form>
+	</div>
+	<div th:replace="fragments/fragment :: footer"></div>
+</body>
+</html>

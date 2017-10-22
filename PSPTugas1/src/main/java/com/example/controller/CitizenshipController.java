@@ -321,4 +321,35 @@ public class CitizenshipController {
     	model.addAttribute("nik", pm.getNik());
     	return "mati-success";
     }
+    
+    @RequestMapping("/penduduk/cari")
+    public String lookupPenduduk(Model model, 
+    		@RequestParam(value = "kelurahan", required = false) Integer kelurahan,
+            @RequestParam(value = "kecamatan", required = false) Integer kecamatan,
+            @RequestParam(value = "kota", required = false) Integer kota) {
+
+    	if (kelurahan != null) {
+    		ArrayList<PendudukModel> listOfPenduduk = citizenshipDAO.searchPendudukByLocation(kelurahan);
+    		model.addAttribute("listOfPenduduk", listOfPenduduk);
+    		return "cari-penduduk-results";
+    	} else if (kecamatan != null) {
+    		ArrayList<KelurahanModel> listOfKel = citizenshipDAO.selectAllKelurahanByIdKecamatan(kecamatan);
+    		KotaModel kom = citizenshipDAO.selectKotaById(kota);
+    		KecamatanModel kcm = citizenshipDAO.selectKecamatanById(kecamatan);
+    		model.addAttribute("kota", kom);
+    		model.addAttribute("kecamatan", kcm);
+    		model.addAttribute("listOfKel", listOfKel);
+    		return "cari-penduduk3";
+    	} else if (kota != null) {
+    		ArrayList<KecamatanModel> listOfKec = citizenshipDAO.selectAllKecamatanByIdKota(kota);
+    		KotaModel kom = citizenshipDAO.selectKotaById(kota);
+    		model.addAttribute("kota", kom);
+    		model.addAttribute("listOfKec", listOfKec);
+    		return "cari-penduduk2";
+    	} else {
+    		ArrayList<KotaModel> listOfKota = citizenshipDAO.selectAllKota();
+        	model.addAttribute("listOfKota", listOfKota);
+        	return "cari-penduduk1";
+    	}
+    }
 }

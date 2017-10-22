@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>SI Kependudukan - tampilkan data</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
+<script
+	src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+</head>
+<body>
+	<div th:replace="fragments/fragment :: header"></div>
+	<h2
+		th:text="'Lihat Data Penduduk Berdasarkan Kelurahan di ' + ${kota.getNama_kota()} + ', Kecamatan ' + ${kecamatan.getNama_kecamatan()}">Lihat
+		Data Penduduk</h2>
+	<div>
+		<form id="form" action="/penduduk/cari" method="get">
+		<input type="hidden" name="kota" th:value = "${kota.getId()}"/>
+		<input type="hidden" name="kecamatan" th:value = "${kecamatan.getId()}"/>
+			Kota <select id="selKota" name="kota" disabled="disabled">
+				<option th:id="${'kot' + kota.getId()}" th:value="${kota.getId()}"
+					th:text="${kota.getNama_kota()}"></option>
+			</select> <br /> Kecamatan <select id="selKec" name="kecamatan"
+				disabled="disabled">
+				<option th:id="${'kec' + kecamatan.getId()}"
+					th:value="${kecamatan.getId()}"
+					th:text="${kecamatan.getNama_kecamatan()}"></option>
+			</select> <br /> Kelurahan/Desa<select id="selKel" name="kelurahan">
+				<option th:id="${'kel' + kelurahan.getId()}"
+					th:each="kelurahan, iterationStatus: ${listOfKel}"
+					th:value="${kelurahan.getId()}"
+					th:text="${kelurahan.getNama_kelurahan()}"></option>
+			</select> <br />
+			<button id="sub" type="submit">Cari</button>
+		</form>
+	</div>
+	<div th:replace="fragments/fragment :: footer"></div>
+</body>
+</html>

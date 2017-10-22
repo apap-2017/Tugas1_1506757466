@@ -43,6 +43,9 @@ public interface CitizenshipMapper {
 
 	@Select("select max(id) from penduduk")
 	Integer selectLargestPendudukId();
+	
+	@Select("select * from penduduk p, keluarga k where k.id_kelurahan = #{idkel} and p.id_keluarga = k.id")
+	ArrayList<PendudukModel> searchPendudukByLocation(Integer idkel);
 
 	// Mapper Keluarga
 	@Select("select * from keluarga where nomor_kk = #{nomor_kk}")
