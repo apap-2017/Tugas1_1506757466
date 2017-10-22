@@ -3,14 +3,15 @@
     <head>
         <title>SI Kependudukan - Homepage</title>
          <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
         <!-- jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<!-- Latest compiled JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
     </head>
     <body>
-    	<h2>ERROR!</h2>
-       	<p th:text="'Data keluarga gagal diubah. Coba cek ulang masukan data Anda.'">NKK is NOT created</p>
+    	<div th:replace="fragments/fragment :: header"></div>
+    	<h2>SUKSES!</h2>
+       	<p th:text="'Keluarga dengan Nomor KK ' + ${nkk} + ' berhasil ditambahkan'">NKK is created</p>
     </body>
 </html>

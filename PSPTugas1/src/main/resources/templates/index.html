@@ -10,14 +10,16 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
 </head>
 <body>
-	<h2>Sistem Informasi Kependudukan Online Provinsi DKI Jakarta</h2>
-	<p>Selamat datang di Sistem Informasi Kependudukan Online Provinsi DKI Jakarta</p>
+	<div th:replace="fragments/fragment :: header"></div>
+	<h2 style="text-align: center;">Sistem Informasi Kependudukan Online Provinsi DKI Jakarta</h2>
+	<p style="text-align: center;">Selamat datang di Sistem Informasi Kependudukan Online Provinsi DKI Jakarta</p>
 	<hr></hr>
-	<div>
+	<div style="text-align: center;">
 		<a href="/penduduk/tambah"><button>Tambah penduduk</button></a>
 		<a href="/keluarga/tambah"><button>Tambah keluarga</button></a>
 	</div>
 	<hr></hr>
+	<div style="text-align: center;">
 	<h3>Lihat Data Penduduk Berdasarkan NIK</h3>
 	<b>Masukkan Nomor Induk Kependudukan</b>
 	<form action="/penduduk" method="get">
@@ -28,7 +30,9 @@
 			<button type="submit" name="action">Lihat</button>
 		</div>
 	</form>
+	</div>
 	<hr></hr>
+	<div style="text-align: center;">
 	<h3>Lihat Data Keluarga Berdasarkan NKK</h3>
 	<b>Masukkan Nomor Kartu Keluarga</b>
 	<form action="/keluarga" method="get">
@@ -39,6 +43,7 @@
 			<button type="submit" name="action">Lihat</button>
 		</div>
 	</form>
-	<div></div>
+	</div>
+	<div th:replace="fragments/fragment :: footer"></div>
 </body>
 </html>

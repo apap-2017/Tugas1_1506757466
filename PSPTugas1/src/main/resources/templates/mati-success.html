@@ -10,6 +10,7 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
     </head>
     <body>
+    	<div th:replace="fragments/fragment :: header"></div>
     	<h2>SUKSES!</h2>
 <!--   <p th:text="'Penduduk dengan NIK ' + ${nik} + ' sudah tidak aktif.'">NIK is dead</p> -->
        	<p>Penduduk dengan NIK <span id='nik_penduduk' th:text='${nik}'></span>  sudah tidak aktif</p>

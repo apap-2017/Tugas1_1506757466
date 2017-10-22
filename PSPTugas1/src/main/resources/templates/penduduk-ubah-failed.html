@@ -10,7 +10,8 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
     </head>
     <body>
-    	<h2>SUKSES!</h2>
-       	<p th:text="'Penduduk dengan NIK ' + ${nik} + ' berhasil ditambahkan.'">NIK is created</p>
+    	<div th:replace="fragments/fragment :: header"></div>
+    	<h2>ERROR!</h2>
+       	<p th:text="'Data penduduk gagal diubah. Coba cek ulang masukan data Anda.'">NIK is NOT changed</p>
     </body>
 </html>

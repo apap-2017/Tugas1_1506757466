@@ -17,6 +17,7 @@ table, th, td {
 </head>
 
 <body>
+	<div th:replace="fragments/fragment :: header"></div>
 	<h2 th:text="'Lihat Data Keluarga - ' + ${keluarga.getNomor_kk()}">Lihat Data Keluarga</h2>
 	<table>
 		<tr>
